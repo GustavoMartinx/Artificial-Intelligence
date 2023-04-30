@@ -43,6 +43,12 @@ class Extraction():
                     imgHeight = img.size[1]     # altura
                     quadrantes = []
 
+                    # aumentando a imagem caso seja menor que o esperado
+                    if imgWidth < 5:
+                        imagem = imagem.resize((5, imgHeight))
+                    if imgHeight < 5:
+                        imagem = imagem.resize((imgWidth, 5))
+
                     # print("Inteira 1x1 imgWidth: ", imgWidth)
                     # print("Inteira 1x1 imgHeight: ", imgHeight)
 
@@ -144,6 +150,12 @@ class Extraction():
                     imgWidth = img.size[0]      # largura
                     imgHeight = img.size[1]     # altura
                     quadrantes = []
+
+                    # aumentando a imagem caso seja menor que o esperado
+                    if imgWidth < 5:
+                        imagem = imagem.resize((5, imgHeight))
+                    if imgHeight < 5:
+                        imagem = imagem.resize((imgWidth, 5))
 
                     # print("Inteira 1x1 imgWidth: ", imgWidth)
                     # print("Inteira 1x1 imgHeight: ", imgHeight)
