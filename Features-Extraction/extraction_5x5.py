@@ -36,7 +36,7 @@ class Extraction():
                     # logica a ser aplicada a cada arquivo aqui
 
                     # abrindo imagem
-                    img = Image.open(filename) # "./treino/0/37138-2-4.bmp"
+                    img = Image.open(filename.path) # "./treino/0/37138-2-4.bmp"
 
                     # obtendo as dimensões de uma imagem
                     imgWidth = img.size[0]      # largura
@@ -45,9 +45,9 @@ class Extraction():
 
                     # aumentando a imagem caso seja menor que o esperado
                     if imgWidth < 5:
-                        imagem = imagem.resize((5, imgHeight))
+                        img = img.resize((5, imgHeight))
                     if imgHeight < 5:
-                        imagem = imagem.resize((imgWidth, 5))
+                        img = img.resize((imgWidth, 5))
 
                     # print("Inteira 1x1 imgWidth: ", imgWidth)
                     # print("Inteira 1x1 imgHeight: ", imgHeight)
@@ -131,7 +131,7 @@ class Extraction():
         # (k^2) *2  | 1x1 = 1 | 2x2 = 7 | 3x3 = 29 | 5x5 = 49
         cols = ""
         cols = cols + "Col1"
-        for i in range(8):
+        for i in range(50):
             cols = cols + f",Col{str(i+2)}"
         res_Teste_5x5.write((cols + "\n"))
 
@@ -144,7 +144,7 @@ class Extraction():
                     # logica a ser aplicada a cada arquivo aqui
                     
                     # abrindo imagem
-                    img = Image.open(filename) # "./treino/0/37138-2-4.bmp"
+                    img = Image.open(filename.path) # "./treino/0/37138-2-4.bmp"
 
                     # obtendo as dimensões de uma imagem
                     imgWidth = img.size[0]      # largura
@@ -153,19 +153,19 @@ class Extraction():
 
                     # aumentando a imagem caso seja menor que o esperado
                     if imgWidth < 5:
-                        imagem = imagem.resize((5, imgHeight))
+                        img = img.resize((5, imgHeight))
                     if imgHeight < 5:
-                        imagem = imagem.resize((imgWidth, 5))
+                        img = img.resize((imgWidth, 5))
 
                     # print("Inteira 1x1 imgWidth: ", imgWidth)
                     # print("Inteira 1x1 imgHeight: ", imgHeight)
 
                     # obtendo as dimensões dos quadrantes (5x5)
-                    for i in range(5):
+                    for z in range(5):
                         for k in range(5):
-                            x0 = imgWidth // 5 * i
+                            x0 = imgWidth // 5 * z
                             y0 = imgHeight // 5 * k
-                            if i == 4:
+                            if z == 4:
                                 x1 = imgWidth
                             else:
                                 x1 = x0 + imgWidth // 5
@@ -200,7 +200,7 @@ class Extraction():
                         res_Teste_5x5.write(f"{blackPixels},{whitePixels},")
                     
                     # Escrevendo a classe que aquela imagem pertence no fim de cada linha
-                    res_Teste_5x5.write(f"{str(j)}\n")
+                    res_Teste_5x5.write(f"{str(i)}\n")
                     
     # Normalizando dados de Teste
     df_teste = pd.read_csv("Teste_5x5.csv")

@@ -36,7 +36,7 @@ class Extraction():
                     # logica a ser aplicada a cada arquivo aqui
 
                     # abrindo imagem
-                    img = Image.open(filename) # "./treino/0/37138-2-4.bmp"
+                    img = Image.open(filename.path) # "./treino/0/37138-2-4.bmp"
 
                     # obtendo as dimensões de uma imagem
                     imgWidth = img.size[0]      # largura
@@ -48,14 +48,14 @@ class Extraction():
 
                     # obtendo as dimensões dos quadrantes (2x2)
                     for i in range(2):
-                        for j in range(2):
+                        for z in range(2):
                             x0 = imgWidth // 2 * i
-                            y0 = imgHeight // 2 * j
+                            y0 = imgHeight // 2 * z
                             if i == 1:
                                 x1 = imgWidth
                             else:
                                 x1 = x0 + imgWidth // 2
-                            if j == 1:
+                            if z == 1:
                                 y1 = imgHeight
                             else:
                                 y1 = y0 + imgHeight // 2
@@ -141,7 +141,7 @@ class Extraction():
                     # logica a ser aplicada a cada arquivo aqui
                     
                     # abrindo imagem
-                    img = Image.open(filename) # "./treino/0/37138-2-4.bmp"
+                    img = Image.open(filename.path) # "./treino/0/37138-2-4.bmp"
 
                     # obtendo as dimensões de uma imagem
                     imgWidth = img.size[0]      # largura
@@ -152,11 +152,11 @@ class Extraction():
                     # print("Inteira 1x1 imgHeight: ", imgHeight)
 
                     # obtendo as dimensões dos quadrantes (2x2)
-                    for i in range(2):
+                    for k in range(2):
                         for j in range(2):
-                            x0 = imgWidth // 2 * i
+                            x0 = imgWidth // 2 * k
                             y0 = imgHeight // 2 * j
-                            if i == 1:
+                            if k == 1:
                                 x1 = imgWidth
                             else:
                                 x1 = x0 + imgWidth // 2
@@ -166,7 +166,7 @@ class Extraction():
                                 y1 = y0 + imgHeight // 2
                             
                             quadrante = img.crop((x0, y0, x1, y1))
-                            # print(f"Largura Altura do Quadrante {i}x{j}: {quadrante.size}")
+                            # print(f"Largura Altura do Quadrante {k}x{j}: {quadrante.size}")
                             quadrantes.append(quadrante)
 
                     # percorrendo a imagem dividida por quadrantes (2x2)
@@ -191,7 +191,7 @@ class Extraction():
                         res_Teste_2x2.write(f"{blackPixels},{whitePixels},")
                     
                     # Escrevendo a classe que aquela imagem pertence no fim de cada linha
-                    res_Teste_2x2.write(f"{str(j)}\n")
+                    res_Teste_2x2.write(f"{str(i)}\n")
                     
     # Normalizando dados de Teste
     df_teste = pd.read_csv("Teste_2x2.csv")

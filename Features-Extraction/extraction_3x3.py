@@ -19,10 +19,10 @@ class Extraction():
         # percorre pelas pastas de numeros (classes) dentro de treino
         dirTreino = project + "/treino/"
 
-        # (k^2) *2  | 1x1 = 1 | 2x2 = 7 | 3x3 = 29 | 5x5 = 49
+        # (k^2) *2  | 1x1 = 1 | 2x2 = 7 | 3x3 = 19 | 5x5 = 49
         cols = ""
         cols = cols + "Col1"
-        for i in range(30):
+        for i in range(18):
             cols = cols + f",Col{str(i+2)}"
         res_Treino_3x3.write((cols + "\n"))
 
@@ -36,7 +36,7 @@ class Extraction():
                     # logica a ser aplicada a cada arquivo aqui
 
                     # abrindo imagem
-                    img = Image.open(filename) # "./treino/0/37138-2-4.bmp"
+                    img = Image.open(filename.path) # "./treino/0/37138-2-4.bmp"
 
                     # obtendo as dimensões de uma imagem
                     imgWidth = img.size[0]      # largura
@@ -49,14 +49,14 @@ class Extraction():
 
                     # obtendo as dimensões dos quadrantes (3x3)
                     for i in range(3):
-                        for j in range(3):
+                        for z in range(3):
                             x0 = imgWidth // 3 * i
-                            y0 = imgHeight // 3 * j
+                            y0 = imgHeight // 3 * z
                             if i == 2:
                                 x1 = imgWidth
                             else:
                                 x1 = x0 + imgWidth // 3
-                            if j == 2:
+                            if z == 2:
                                 y1 = imgHeight
                             else:
                                 y1 = y0 + imgHeight // 3
@@ -124,10 +124,10 @@ class Extraction():
         # percorre pelas pastas de numeros dentro de teste
         dirTeste = project + "/teste/"
 
-        # (k^2) *2  | 1x1 = 1 | 2x2 = 7 | 3x3 = 29 | 5x5 = 49
+        # (k^2) *2  | 1x1 = 1 | 2x2 = 7 | 3x3 = 17 | 5x5 = 49
         cols = ""
         cols = cols + "Col1"
-        for i in range(8):
+        for i in range(18):
             cols = cols + f",Col{str(i+2)}"
         res_Teste_3x3.write((cols + "\n"))
 
@@ -140,7 +140,7 @@ class Extraction():
                     # logica a ser aplicada a cada arquivo aqui
                     
                     # abrindo imagem
-                    img = Image.open(filename) # "./treino/0/37138-2-4.bmp"
+                    img = Image.open(filename.path) # "./treino/0/37138-2-4.bmp"
 
                     # obtendo as dimensões de uma imagem
                     imgWidth = img.size[0]      # largura
@@ -151,11 +151,11 @@ class Extraction():
                     # print("Inteira 1x1 imgHeight: ", imgHeight)
 
                     # obtendo as dimensões dos quadrantes (3x3)
-                    for i in range(3):
+                    for k in range(3):
                         for j in range(3):
-                            x0 = imgWidth // 3 * i
+                            x0 = imgWidth // 3 * k
                             y0 = imgHeight // 3 * j
-                            if i == 2:
+                            if k == 2:
                                 x1 = imgWidth
                             else:
                                 x1 = x0 + imgWidth // 3
@@ -165,7 +165,7 @@ class Extraction():
                                 y1 = y0 + imgHeight // 3
                             
                             quadrante = img.crop((x0, y0, x1, y1))
-                            # print(f"Largura Altura do Quadrante {i}x{j}: {quadrante.size}")
+                            # print(f"Largura Altura do Quadrante {k}x{j}: {quadrante.size}")
                             quadrantes.append(quadrante)
 
                     # percorrendo a imagem dividida por quadrantes (3x3)
@@ -190,7 +190,7 @@ class Extraction():
                         res_Teste_3x3.write(f"{blackPixels},{whitePixels},")
                     
                     # Escrevendo a classe que aquela imagem pertence no fim de cada linha
-                    res_Teste_3x3.write(f"{str(j)}\n")
+                    res_Teste_3x3.write(f"{str(i)}\n")
                     
     # Normalizando dados de Teste
     df_teste = pd.read_csv("Teste_3x3.csv")

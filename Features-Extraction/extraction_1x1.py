@@ -35,7 +35,7 @@ class Extraction():
                     # logica a ser aplicada a cada arquivo aqui
                     
                     # abrindo imagem
-                    img = Image.open(filename) # "./treino/0/37138-2-4.bmp"
+                    img = Image.open(filename.path) # "./treino/0/37138-2-4.bmp"
 
                     # obtendo as dimensões de uma imagem
                     imgWidth = img.size[0]      # largura
@@ -115,7 +115,7 @@ class Extraction():
                     # logica a ser aplicada a cada arquivo aqui
                     
                     # abrindo imagem
-                    img = Image.open(filename) # "./treino/0/37138-2-4.bmp"
+                    img = Image.open(filename.path) # "./treino/0/37138-2-4.bmp"
 
                     # obtendo as dimensões de uma imagem
                     imgWidth = img.size[0]      # largura
@@ -138,7 +138,7 @@ class Extraction():
                                 whitePixels += 1
                     
                     # printando a qtde de pixels B e W da imagem toda (1x1)
-                    res_Teste_1x1.write(f"{blackPixels},{whitePixels},{str(j)}\n")
+                    res_Teste_1x1.write(f"{blackPixels},{whitePixels},{str(i)}\n")
                     blackPixels = 0
                     whitePixels = 0
                     
