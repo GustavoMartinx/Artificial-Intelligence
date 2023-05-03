@@ -15,6 +15,20 @@ def euclidian_distances(x_test, x_train):
     
     return (acc**(0.5))
 
+
+# Retorna um novo array com X linhas selecionadas aleatoriamente do array de entrada
+def sample_data(array, X):
+
+    # Embaralhar as linhas do array
+    np.random.shuffle(array)
+
+    # calcula a quantidade de linhas a serem selecionadas
+    n_rows = int(len(array) * X)
+
+    # seleciona as n_rows primeiras linhas do array embaralhado
+    return array[:n_rows]
+
+
 class KNN:
 
     # Construtor
@@ -39,17 +53,17 @@ class KNN:
     # pega apenas uma amostra do conjunto (x minúsculo)
     def _predict(self, x):
         
-        # obtendo as distâncias entre uma linha do teste e cada linha do treino
+        # obtém as distâncias entre uma linha do Teste e cada linha do Treino
         distances = [euclidian_distances(x, x_train) for x_train in self.X_train]
 
-        # ordena as distancias encontradas, as ordena
-        # e seleciona os indices das K primeiras amostras
+        # ordena as distâncias encontradas, e seleciona
+        # os indices das K primeiras amostras
         k_indices = np.argsort(distances)[:self.k]
 
-        # pega as classes as quais pertencem os k primeiros 
+        # pega as classes as quais pertencem os k primeiros
         k_nearest_labels = [self.Y_train[i] for i in k_indices]
 
-        # mais votado, most commom class label
+        # obtém classe mais votado, most commom class label
         most_commom = Counter(k_nearest_labels).most_common(1)
         return most_commom[0][0]
     
@@ -88,7 +102,17 @@ classes_teste = df_teste.iloc[:, -1].values
 # print(classes_teste)
 
 
-''' Normalizando os dados '''
+''' Separando os dados em 25% e 50% '''
+
+# features_treino_25 = sample_data(features_treino, 0.25)
+# features_treino_50 = sample_data(features_treino, 0.5)
+
+# print(features_treino_25)
+# print(len(features_treino_25))
+# print(len(features_treino_50))
+
+
+''' Normalizando os dados 
 
 # criando o objeto normalizer
 normalizer = MinMaxScaler()
@@ -98,19 +122,19 @@ features_train_normalized = normalizer.fit_transform(features_treino)
 
 # aplicando a normalização nos dados do Teste
 features_test_normalized = normalizer.fit_transform(features_teste)
-
+'''
 
 
 ''' Chamando KNN '''
 
 classifier = KNN(k=1)
 
-# Treino: passa os dados normalizados e suas classes pra func fit
-classifier.fit(features_train_normalized, classes_treino)
+# Treino: passa os dados e suas classes pra func fit
+classifier.fit(features_treino, classes_treino) # features_treino = 100% | features_treino_50 = 50% | features_treino_25 = 25%
 
 # executa o teste
-predictions = classifier.predict(features_test_normalized)
+predictions = classifier.predict(features_teste)
 
 # calculando a acurácia
 acc = np.sum(predictions == classes_teste) / len(classes_teste)
-print(acc)
+print(f"k = 1: {round(acc*100, 3)}% {acc}")
