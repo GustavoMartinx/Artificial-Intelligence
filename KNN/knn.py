@@ -5,15 +5,11 @@ import pandas as pd
 
 def euclidian_distances(x_test, x_train):
     
-    C = np.zeros(x_test.size)
-
-    for i in range(x_test.size):
-        
-        C[i] = (x_test[i] - x_train[i])**2
-
+    C = x_test - x_train
+    C = np.square(C)
     acc = np.sum(C)
-    
     return (acc**(0.5))
+
 
 
 # Retorna um novo array com X linhas selecionadas aleatoriamente do array de entrada
@@ -72,8 +68,8 @@ class KNN:
 
 ''' Abrindo/Carregando os aquivos '''
 
-df_treino = pd.read_csv("treino.txt", delimiter=',')
-df_teste = pd.read_csv("teste.txt", delimiter=',') 
+df_treino = pd.read_csv("features_prof/treinamento.txt", delimiter=' ')
+df_teste = pd.read_csv("features_prof/teste.txt", delimiter=' ')
 
 
 ''' Separando os dados/features e as classes '''
