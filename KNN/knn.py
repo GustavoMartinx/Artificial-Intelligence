@@ -72,13 +72,8 @@ class KNN:
 
 ''' Abrindo/Carregando os aquivos '''
 
-df_treino = pd.read_csv("features_prof/treinamento.txt", delimiter=' ')
-df_teste = pd.read_csv("features_prof/teste.txt", delimiter=' ')
-
-# print(df_treino)
-# print(df_treino.describe())
-# print(df_teste)
-# print(df_teste.describe())
+df_treino = pd.read_csv("treino.txt", delimiter=',')
+df_teste = pd.read_csv("teste.txt", delimiter=',') 
 
 
 ''' Separando os dados/features e as classes '''
@@ -89,8 +84,6 @@ features_treino = df_treino.iloc[:, :-1].values
 # seleciona apenas a coluna da classe (última) | Y
 classes_treino = df_treino.iloc[:, -1].values
 
-# print(features_treino)
-# print(classes_treino)
 
 # seleciona todo o Teste exceto a coluna das classes (última col) | X
 features_teste = df_teste.iloc[:, :-1].values
@@ -98,8 +91,6 @@ features_teste = df_teste.iloc[:, :-1].values
 # seleciona apenas a coluna da classe (última) | Y
 classes_teste = df_teste.iloc[:, -1].values
 
-# print(features_teste)
-# print(classes_teste)
 
 
 ''' Separando os dados em 25% e 50% '''
@@ -107,9 +98,6 @@ classes_teste = df_teste.iloc[:, -1].values
 # features_treino_25 = sample_data(features_treino, 0.25)
 # features_treino_50 = sample_data(features_treino, 0.5)
 
-# print(features_treino_25)
-# print(len(features_treino_25))
-# print(len(features_treino_50))
 
 
 ''' Normalizando os dados 
@@ -126,8 +114,8 @@ features_test_normalized = normalizer.fit_transform(features_teste)
 
 
 ''' Chamando KNN '''
-
-classifier = KNN(k=1)
+K = 1
+classifier = KNN(k=K)
 
 # Treino: passa os dados e suas classes pra func fit
 classifier.fit(features_treino, classes_treino) # features_treino = 100% | features_treino_50 = 50% | features_treino_25 = 25%
@@ -137,4 +125,4 @@ predictions = classifier.predict(features_teste)
 
 # calculando a acurácia
 acc = np.sum(predictions == classes_teste) / len(classes_teste)
-print(f"k = 1: {round(acc*100, 3)}% {acc}")
+print(f"k = {K}: {round(acc*100, 3)}%")
