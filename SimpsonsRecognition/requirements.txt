@@ -1,3 +1,6 @@
-pip install tensorflow==2.12.*
-pip install opencv-python
-pip install scikit-learn
+tensorflow==2.12.*
+opencv-python
+scikit-learn
+numpy
+matplotlib
+seaborn
